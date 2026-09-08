@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -24,6 +24,12 @@ export const LoginScreen = () => {
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (serverUrl) {
+      setCustomUrl(serverUrl);
+    }
+  }, [serverUrl]);
 
   const handleLogin = async () => {
     if (!email.trim() || !password) {
