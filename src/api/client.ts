@@ -3,7 +3,7 @@ import * as SecureStore from 'expo-secure-store';
 
 // Default development IP - standard localhost or emulator. 
 // Can be customized at runtime in the app settings or login screen.
-export const DEFAULT_API_URL = 'https://speakers-governmental-developments-bristol.trycloudflare.com/api'; // Active Cloudflare Tunnel for Mobile Data
+export const DEFAULT_API_URL = 'https://inventory-backend-sisrafilss-projects.vercel.app/api'; // Official Production Vercel Backend
 // For local emulator: http://10.0.2.2:5000/api, For local WiFi: http://192.168.x.x:5000/api
 
 const TOKEN_KEY = 'auth_token';
@@ -32,14 +32,12 @@ export const getBaseUrl = async (): Promise<string> => {
     const saved = await SecureStore.getItemAsync(API_URL_KEY);
     if (
       saved &&
-      !saved.includes('loca.lt') &&
-      !saved.includes('10.0.2.2') &&
-      saved.includes('trycloudflare.com')
+      (saved.includes('vercel.app') || saved.includes('192.168.'))
     ) {
       apiClient.defaults.baseURL = saved;
       return saved;
     }
-    // Set to live active Cloudflare tunnel
+    // Automatically use the live production Vercel backend
     apiClient.defaults.baseURL = DEFAULT_API_URL;
     await SecureStore.setItemAsync(API_URL_KEY, DEFAULT_API_URL);
   } catch (e) {
