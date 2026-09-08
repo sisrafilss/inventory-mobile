@@ -3,7 +3,7 @@ import * as SecureStore from 'expo-secure-store';
 
 // Default development IP - standard localhost or emulator. 
 // Can be customized at runtime in the app settings or login screen.
-export const DEFAULT_API_URL = 'https://inventory-api-israfil.loca.lt/api'; // Active Cloud Tunnel for Mobile Data
+export const DEFAULT_API_URL = 'https://inventory-api-live.loca.lt/api'; // Active Cloud Tunnel for Mobile Data
 // For local emulator: http://10.0.2.2:5000/api, For local WiFi: http://192.168.x.x:5000/api
 
 const TOKEN_KEY = 'auth_token';
@@ -32,14 +32,17 @@ export const setBaseUrl = async (url: string) => {
 export const getBaseUrl = async (): Promise<string> => {
   try {
     const saved = await SecureStore.getItemAsync(API_URL_KEY);
-    if (saved) {
+    if (saved && !saved.includes('israfil.loca.lt') && !saved.includes('tasty-turkeys') && !saved.includes('10.0.2.2')) {
       apiClient.defaults.baseURL = saved;
       return saved;
     }
+    // Set to live active tunnel
+    apiClient.defaults.baseURL = DEFAULT_API_URL;
+    await SecureStore.setItemAsync(API_URL_KEY, DEFAULT_API_URL);
   } catch (e) {
     // Fallback if secure store unavailable
   }
-  return apiClient.defaults.baseURL || DEFAULT_API_URL;
+  return DEFAULT_API_URL;
 };
 
 // Request interceptor to attach JWT token

@@ -51,19 +51,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    setLoading(true);
-    try {
-      const res = await apiClient.post('/auth/login', { email, password });
-      const { token: receivedToken, user: receivedUser } = res.data?.data || res.data;
-      if (receivedToken) {
-        await saveAuthToken(receivedToken);
-        setToken(receivedToken);
-        setUser(receivedUser);
-      } else {
-        throw new Error('Authentication failed: No token returned');
-      }
-    } finally {
-      setLoading(false);
+    const res = await apiClient.post('/auth/login', { email, password });
+    const { token: receivedToken, user: receivedUser } = res.data?.data || res.data;
+    if (receivedToken) {
+      await saveAuthToken(receivedToken);
+      setToken(receivedToken);
+      setUser(receivedUser);
+    } else {
+      throw new Error('Authentication failed: No token returned');
     }
   };
 
