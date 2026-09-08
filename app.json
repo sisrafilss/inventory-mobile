@@ -16,12 +16,15 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.sisrafilss.inventoryapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0284c7"
       },
       "permissions": [
-        "CAMERA"
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "plugins": [
@@ -32,6 +35,12 @@
         }
       ],
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "90a5830f-75ef-4af0-bf2d-b6169f29e118"
+      }
+    },
+    "owner": "sisrafilss"
   }
 }
