@@ -3,7 +3,7 @@ import * as SecureStore from 'expo-secure-store';
 
 // Default development IP - standard localhost or emulator. 
 // Can be customized at runtime in the app settings or login screen.
-export const DEFAULT_API_URL = 'https://tasty-turkeys-behave.loca.lt/api'; // Active Cloud Tunnel for Mobile Data
+export const DEFAULT_API_URL = 'https://inventory-api-israfil.loca.lt/api'; // Active Cloud Tunnel for Mobile Data
 // For local emulator: http://10.0.2.2:5000/api, For local WiFi: http://192.168.x.x:5000/api
 
 const TOKEN_KEY = 'auth_token';
