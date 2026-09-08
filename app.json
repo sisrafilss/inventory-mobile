@@ -30,8 +30,8 @@
         {
           "cameraPermission": "Allow Inventory App to scan barcodes."
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }
-
